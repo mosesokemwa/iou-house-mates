@@ -118,7 +118,6 @@ router.post('/add', async ctx => {
  *    }
  */
 
-
 router.post('/iou', async ctx => {
   let ledgerData = ctx.request.body;
   ctx.assert(ledgerData, 400, 'No user data provided');
@@ -126,7 +125,7 @@ router.post('/iou', async ctx => {
 
   try {
     await Ledger.query().insertAndFetch(ledgerData);
-    let ledger = await knex.raw("SELECT COALESCE(json_object_agg(borrower,amount) FILTER (WHERE borrower != 'Adam'), '{}') AS owed_by, COALESCE(json_object_agg(lender,amount) FILTER (WHERE lender != 'Adam'), '{}') AS owes, SUM(CASE WHEN lender = 'Adam' THEN amount ELSE 0 END) - SUM(CASE WHEN borrower = 'Adam' THEN amount ELSE 0 END) as balance FROM ledgers where borrower = 'Adam' or lender = 'Adam';")
+    let ledger = await knex.raw(`SELECT COALESCE(json_object_agg(borrower,amount) FILTER (WHERE borrower != ?), '{}') AS owed_by, COALESCE(json_object_agg(lender,amount) FILTER (WHERE lender != ?), '{}') AS owes, SUM(CASE WHEN lender = ? THEN amount ELSE 0 END) - SUM(CASE WHEN borrower = ? THEN amount ELSE 0 END) as balance FROM ledgers where borrower = ? or lender = ?;`, [lender,lender,lender,lender,lender,lender])
     ledger=ledger.rows[0]
     ledger['owed_by']=ledger.owed_by
     ledger['owes']=ledger.owes

@@ -63,7 +63,7 @@ define({ "api": [
             "group": "Request body",
             "type": "String",
             "optional": false,
-            "field": "users",
+            "field": "users[]",
             "description": "<p>Username - Unique.</p>"
           }
         ]

@@ -25,3 +25,4 @@
 
 TODO:
 - [ ] Implement cascade deletion of iou's
+- [x] Use a join table for cleaner queries
