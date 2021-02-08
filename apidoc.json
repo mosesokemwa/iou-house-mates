@@ -1,0 +1,12 @@
+{
+    "name": "IOU_LEDGER",
+    "version": "0.4.0",
+    "description": "Housemates money managers",
+    "title": "Housemates money ledger docs",
+    "url": "http://localhost:3000",
+    "sampleUrl": "http://localhost:3000",
+    "header": {
+      "title": "Getting Started",
+      "filename": "README.md"
+  }
+}
