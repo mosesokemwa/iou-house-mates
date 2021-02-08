@@ -22,3 +22,6 @@
 | POST        |`/add`    |``{"user":}``                             | N/A                  |``<User object for rew users)``     |Create User              |
 | POST        |`/iou`    |``{"lender":,"borrower":,"amount":5.25}`` | N/A                  |``{"users": and (sorted by name)>}``|Create IOU               |
 
+
+TODO:
+- [ ] Implement cascade deletion of iou's
