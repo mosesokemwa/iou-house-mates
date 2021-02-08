@@ -7,7 +7,20 @@ class User extends Model {
   }
 
   static get relationMappings() {
-    return {};
+    return {
+      userLedger: {
+        relation: Model.ManyToManyRelation,
+        modelClass: __dirname + '/ledgers',
+        join: {
+          from: 'users.id',
+          through: {
+            from: 'ledger_user.user_id',
+            to:'ledger_user.user_id',
+          },
+          to: 'ledgers.id'
+        }
+      }
+    };
   }
 
   static get modifiers() {

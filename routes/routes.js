@@ -13,7 +13,9 @@ const router = new Router({
  * @apiName GetUsers
  * @apiGroup User
  *
- * @apiParam (Request body) {String} users[] Username - Unique.
+ * @apiParam (Request body) {String} users Username - Unique.
+ *
+ * @apiSampleRequest off
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 201 OK
@@ -27,20 +29,26 @@ const router = new Router({
  *     }
  */
 router.get('/users', async ctx => {
+  const usernames = ctx.request.body.users;
+  let users
+  if(usernames == undefined) ctx.status = 200,ctx.body = users
   try {
+
     // Build query using knex pluck - http://knexjs.org/#Builder-pluck
     // let users = await knex.table('users').pluck('username');
 
     // in ObjectionJs pluck, pick, and omit is deprecated  https://github.com/Vincit/objection.js/issues/1588
     // Ordered by username
-    console.log(ctx.request.body.users);
-    const users = await User.query().whereIn('username', ctx.request.body.users).orderBy('username');
-
+    users = await User.query().whereIn('username', usernames).orderBy('username');
     ctx.status = 200;
-    ctx.body = { users: users };
+    ctx.body = { users };
+
   } catch (e) {
     ctx.throw(404, null, { errors: [e.message] });
   }
+
+
+
 });
 
 /**
@@ -136,6 +144,24 @@ router.post('/iou', async ctx => {
     ctx.body = ledger;
   } catch (e) {
     ctx.throw(400, null, { errors: [e.message] });
+  }
+});
+
+
+router.delete('/users/:username', async ctx => {
+  try {
+    // Build query using knex pluck - http://knexjs.org/#Builder-pluck
+    // let users = await knex.table('users').pluck('username');
+
+    // in ObjectionJs pluck, pick, and omit is deprecated  https://github.com/Vincit/objection.js/issues/1588
+    // Ordered by username
+    console.log(ctx.request.body.users);
+    const users = await User.query().delete('username', ctx.params.username).eager('userLedger(selectLedger)');
+
+    ctx.status = 200;
+    ctx.body = { users: users };
+  } catch (e) {
+    ctx.throw(404, null, { errors: [e.message] });
   }
 });
 module.exports = router.routes();

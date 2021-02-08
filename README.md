@@ -13,7 +13,7 @@
 2. Clone repo, and run ``yarn`` to install dependencies
 3. Run migrations using ``yarn db:init`` and seeds db ``yarn db:seed``
 4. Run local server ``yarn start``
-5. Below are the api endpoints
+5. Below are the api endpoints, also available [here](https://mosesokemwa.github.io/iou-house-mates/index.html)
 
 
 | HTTP Method | Resource | Payload Format                           | Response w/o Payload | Response w/ Payload                | Description             |
@@ -26,3 +26,4 @@
 TODO:
 - [ ] Implement cascade deletion of iou's
 - [x] Use a join table for cleaner queries
+- [x] GitHub docs using apidoc

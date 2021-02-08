@@ -63,7 +63,7 @@ define({ "api": [
             "group": "Request body",
             "type": "String",
             "optional": false,
-            "field": "users[]",
+            "field": "users",
             "description": "<p>Username - Unique.</p>"
           }
         ]
@@ -89,12 +89,7 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "./routes/routes.js",
-    "groupTitle": "User",
-    "sampleRequest": [
-      {
-        "url": "http://localhost:3000/users"
-      }
-    ]
+    "groupTitle": "User"
   },
   {
     "type": "post",
