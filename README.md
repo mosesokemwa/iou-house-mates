@@ -24,6 +24,6 @@
 
 
 TODO:
-- [ ] Implement cascade deletion of iou's
+- [x] Implement cascade deletion of iou's
 - [x] Use a join table for cleaner queries
 - [x] GitHub docs using apidoc
