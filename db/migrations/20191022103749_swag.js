@@ -11,8 +11,8 @@ exports.up = knex => knex.schema
   })
   .createTable('ledgers', table => {
     table.text('id').primary().notNullable().defaultTo(knex.raw('next_id()'));
-    table.text('lender');
-    table.text('borrower');
+    table.text('lender').references('id').inTable('users').notNull().onDelete('cascade');
+    table.text('borrower').references('id').inTable('users').notNull().onDelete('cascade');
     table.float('amount');
     table.timestamps();
   });

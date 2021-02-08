@@ -13,6 +13,8 @@ const router = new Router({
  * @apiName GetUsers
  * @apiGroup User
  *
+ * @apiParam (Request body) {String} users[] Username - Unique.
+ *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 201 OK
  *     {
@@ -31,7 +33,8 @@ router.get('/users', async ctx => {
 
     // in ObjectionJs pluck, pick, and omit is deprecated  https://github.com/Vincit/objection.js/issues/1588
     // Ordered by username
-    const users = await User.query().where(ctx.query).select("username").orderBy('username').then(items => items.map(it => it.username))
+    console.log(ctx.request.body.users);
+    const users = await User.query().whereIn('username', ctx.request.body.users).orderBy('username');
 
     ctx.status = 200;
     ctx.body = { users: users };

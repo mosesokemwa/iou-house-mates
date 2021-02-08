@@ -56,6 +56,19 @@
     "title": "GET users",
     "name": "GetUsers",
     "group": "User",
+    "parameter": {
+      "fields": {
+        "Request body": [
+          {
+            "group": "Request body",
+            "type": "String",
+            "optional": false,
+            "field": "users",
+            "description": "<p>Username - Unique.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "examples": [
         {
