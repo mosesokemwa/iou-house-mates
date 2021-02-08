@@ -31,17 +31,13 @@ const router = new Router({
 router.get('/users', async ctx => {
   const usernames = ctx.request.body.users;
   let users
-  if(usernames == undefined) ctx.status = 200,ctx.body = users
   try {
-
-    // Build query using knex pluck - http://knexjs.org/#Builder-pluck
-    // let users = await knex.table('users').pluck('username');
 
     // in ObjectionJs pluck, pick, and omit is deprecated  https://github.com/Vincit/objection.js/issues/1588
     // Ordered by username
     users = await User.query().whereIn('username', usernames).orderBy('username');
     ctx.status = 200;
-    ctx.body = { users };
+    ctx.body = { users: users };
 
   } catch (e) {
     ctx.throw(404, null, { errors: [e.message] });
